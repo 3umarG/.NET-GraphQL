@@ -1,6 +1,8 @@
 using GraphQL.Api.Schema;
 using GraphQL.Api.Schema.Mutations;
 using GraphQL.Api.Schema.Subscriptions;
+using GraphQL.Api.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,8 @@ builder.Services.AddGraphQLServer()
     .AddSubscriptionType<Subscription>()
     .AddInMemorySubscriptions();
 
-
+builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("Local")!));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
