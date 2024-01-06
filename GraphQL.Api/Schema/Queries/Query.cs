@@ -14,7 +14,7 @@ public class Query
             {
                 Id = i+1,
                 Name = $"Course Number : {i+1}",
-                Salary = i * 100 + 30,
+                Price = i * 100 + 30,
                 Students = new []
                 {
                     new StudentType

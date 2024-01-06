@@ -4,7 +4,7 @@ public class CourseType
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public double Salary { get; set; }
+    public double Price { get; set; }
     
     [GraphQLNonNullType]
     public TeacherType Teacher { get; set; }
