@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Api", "GraphQL.Api\GraphQL.Api.csproj", "{D0B7332F-AE42-427C-9F1F-4AA540BE85E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0B7332F-AE42-427C-9F1F-4AA540BE85E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B7332F-AE42-427C-9F1F-4AA540BE85E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B7332F-AE42-427C-9F1F-4AA540BE85E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B7332F-AE42-427C-9F1F-4AA540BE85E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
