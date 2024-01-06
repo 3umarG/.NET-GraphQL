@@ -24,20 +24,7 @@ public class Query
             Id = c.Id,
             Name = c.Name,
             Price = c.Price,
-            Teacher = new TeacherType
-            {
-                Id = c.Teacher.Id,
-                FirstName = c.Teacher.FirstName,
-                LastName = c.Teacher.LastName,
-                Salary = c.Teacher.Salary
-            },
-            Students = c.Students.Select(s => new StudentType
-            {
-                Id = s.Id,
-                FirstName = s.FirstName,
-                LastName = s.LastName,
-                GPA = s.GPA
-            })
+            TeacherId = c.TeacherId
         };
     }
 

@@ -41,13 +41,7 @@ public class Mutation
             Id = course.Id,
             Name = course.Name,
             Price = course.Price,
-            Teacher = new TeacherType
-            {
-                Id = course.TeacherId,
-                FirstName = course.Teacher.FirstName,
-                LastName = course.Teacher.LastName,
-                Salary = course.Teacher.Salary
-            }
+            TeacherId = course.TeacherId
         };
     }
 

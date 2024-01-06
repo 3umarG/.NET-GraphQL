@@ -1,3 +1,4 @@
+using GraphQL.Api.DataLoaders;
 using GraphQL.Api.Repositories;
 using GraphQL.Api.Schema.Queries;
 using GraphQL.Api.Schema.Mutations;
@@ -23,6 +24,8 @@ builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Local")!));
 
 builder.Services.AddScoped<CoursesRepository>();
+builder.Services.AddScoped<TeachersRepository>();
+builder.Services.AddScoped<TeacherDataLoader>();
 
 
 var app = builder.Build();

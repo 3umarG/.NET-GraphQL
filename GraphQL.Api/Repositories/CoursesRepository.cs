@@ -18,8 +18,10 @@ public class CoursesRepository
     public async Task<IEnumerable<Course>> GetAll()
     {
         var courses = await _dbContext.Courses
-            .Include(c => c.Teacher)
-            .Include(c => c.Students)
+            // Todo : we won't include/join them all the time we get courses, instead we will use
+            // Todo :   DataLoaders to prevent N+1 problem 
+            // .Include(c => c.Teacher)
+            // .Include(c => c.Students)
             .ToListAsync();
 
         return courses;
@@ -69,9 +71,9 @@ public class CoursesRepository
     private async Task<Course> FindCourseOrThrowNotFound(int id)
     {
         var course = await _dbContext.Courses
-            .Include(c => c.Teacher)
-            .Include(c => c.Students)
-            .AsSplitQuery()
+            // .Include(c => c.Teacher)
+            // .Include(c => c.Students)
+            // .AsSplitQuery()
             .FirstOrDefaultAsync(c => c.Id == id);
         
         if (course is null)
