@@ -1,5 +1,6 @@
 using GraphQL.Api.Schema;
 using GraphQL.Api.Schema.Mutations;
+using GraphQL.Api.Schema.Subscriptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddSubscriptionType<Subscription>()
+    .AddInMemorySubscriptions();
+
 
 var app = builder.Build();
 
@@ -27,6 +31,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGraphQLWebSocket();
 
 app.MapGraphQL();
 
