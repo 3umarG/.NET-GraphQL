@@ -1,4 +1,5 @@
-using GraphQL.Api.Schema;
+using GraphQL.Api.Repositories;
+using GraphQL.Api.Schema.Queries;
 using GraphQL.Api.Schema.Mutations;
 using GraphQL.Api.Schema.Subscriptions;
 using GraphQL.Api.Services;
@@ -20,6 +21,10 @@ builder.Services.AddGraphQLServer()
 
 builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Local")!));
+
+builder.Services.AddScoped<CoursesRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

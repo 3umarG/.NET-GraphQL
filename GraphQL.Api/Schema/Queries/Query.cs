@@ -1,53 +1,50 @@
-﻿namespace GraphQL.Api.Schema;
+﻿using GraphQL.Api.Models;
+using GraphQL.Api.Repositories;
+
+namespace GraphQL.Api.Schema.Queries;
 
 public class Query
 {
-    [GraphQLDeprecated("Not Supported yet ..")]
-    public string Instructions => "Hello there ...!!";
+    private readonly CoursesRepository _coursesRepository;
 
-    public Task<IEnumerable<CourseType>> GetCourses()
+    public Query(CoursesRepository coursesRepository)
     {
-        var courses = new List<CourseType>();
-        for (var i = 0; i < 5; i++)
-        {
-            courses.Add(new CourseType
-            {
-                Id = i+1,
-                Name = $"Course Number : {i+1}",
-                Price = i * 100 + 30,
-                Students = new []
-                {
-                    new StudentType
-                    {
-                        Id = i + 2,
-                        FirstName = $"Student : {i+1}",
-                        LastName = "Last Name",
-                        GPA = 4
-                    }
-                },
-                Teacher = new TeacherType
-                {
-                    Id = 2,
-                    FirstName = $"Teacher : {i+1}",
-                    LastName = "Last Name",
-                    Salary = 2000
-                }
-            });
-        }
+        _coursesRepository = coursesRepository;
+    }
 
-        return Task.FromResult<IEnumerable<CourseType>>(courses);
+    public async Task<IEnumerable<CourseType>> GetCourses()
+    {
+        return (await _coursesRepository.GetAll()).Select(MapCourseTypeFromCourseModel);
+    }
+
+    private static CourseType MapCourseTypeFromCourseModel(Course c)
+    {
+        return new CourseType
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Price = c.Price,
+            Teacher = new TeacherType
+            {
+                Id = c.Teacher.Id,
+                FirstName = c.Teacher.FirstName,
+                LastName = c.Teacher.LastName,
+                Salary = c.Teacher.Salary
+            },
+            Students = c.Students.Select(s => new StudentType
+            {
+                Id = s.Id,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                GPA = s.GPA
+            })
+        };
     }
 
 
-    public async Task<StudentType> GetStudentByIdAsync(int id)
+    public async Task<CourseType> GetCourseByIdAsync(int id)
     {
-        await Task.Delay(100);
-        return new StudentType
-        {
-            Id = id,
-            FirstName = $"Student with ID : {id}",
-            LastName = "Last Name",
-            GPA = 4
-        };
+        var course = await _coursesRepository.GetById(id);
+        return MapCourseTypeFromCourseModel(course);
     }
 }

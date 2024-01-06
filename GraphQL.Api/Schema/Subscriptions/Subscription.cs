@@ -1,4 +1,6 @@
-﻿namespace GraphQL.Api.Schema.Subscriptions;
+﻿using GraphQL.Api.Schema.Queries;
+
+namespace GraphQL.Api.Schema.Subscriptions;
 
 public class Subscription
 {
