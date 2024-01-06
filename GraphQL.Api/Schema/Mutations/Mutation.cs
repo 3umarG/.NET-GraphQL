@@ -13,7 +13,7 @@ public class Mutation
     {
         var course = new CourseType
         {
-            Id = 1,
+            Id = courseInput.Id,
             Name = courseInput.Name,
             Price = courseInput.Price,
             Teacher = new TeacherType
@@ -35,6 +35,7 @@ public class Mutation
             throw new GraphQLException(new Error($"Not Found Course with ID : {id}", code: "404"));
         }
 
+        course.Id = courseInput.Id;
         course.Name = courseInput.Name;
         course.Price = courseInput.Price;
         course.Teacher.Id = courseInput.TeacherId;
